@@ -1,0 +1,197 @@
+# Kodi Media Center language file
+# Addon Name: TOP Posters
+# Addon id: service.topposters
+# Addon Provider: TOP Posters
+msgid ""
+msgstr ""
+"Project-Id-Version: service.topposters\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#32000"
+msgid "General"
+msgstr "Generale"
+
+msgctxt "#32001"
+msgid "Account"
+msgstr "Account"
+
+msgctxt "#32002"
+msgid "API key"
+msgstr "API key"
+
+msgctxt "#32003"
+msgid "Your TOP Posters API key (it starts with TP-). You find it in your dashboard at top-posters.com."
+msgstr "La tua API key di TOP Posters (inizia con TP-). La trovi nella tua dashboard su top-posters.com."
+
+msgctxt "#32004"
+msgid "Check API key"
+msgstr "Verifica API key"
+
+msgctxt "#32005"
+msgid "Shows your plan and which artwork it includes."
+msgstr "Mostra il tuo piano e quali immagini include."
+
+msgctxt "#32006"
+msgid "Use TOP Posters artwork"
+msgstr "Usa l'artwork di TOP Posters"
+
+msgctxt "#32007"
+msgid "When off, your original artwork is put back and kept, even after new library scans."
+msgstr "Se disattivato, l'artwork originale torna al suo posto e ci resta, anche dopo le nuove scansioni della libreria."
+
+msgctxt "#32010"
+msgid "Libraries"
+msgstr "Librerie"
+
+msgctxt "#32011"
+msgid "Movies"
+msgstr "Film"
+
+msgctxt "#32012"
+msgid "TV shows"
+msgstr "Serie TV"
+
+msgctxt "#32019"
+msgid "Transparent title logo with rating badges, used by skins as clearlogo. Switch logos on in your TOP Posters dashboard first."
+msgstr "Logo trasparente del titolo con i badge dei rating, usato dalle skin come clearlogo. Prima attiva i loghi nella dashboard di TOP Posters."
+
+msgctxt "#32020"
+msgid "Artwork"
+msgstr "Artwork"
+
+msgctxt "#32021"
+msgid "Posters"
+msgstr "Poster"
+
+msgctxt "#32022"
+msgid "Season posters"
+msgstr "Poster delle stagioni"
+
+msgctxt "#32023"
+msgid "Episode thumbnails"
+msgstr "Miniature degli episodi"
+
+msgctxt "#32024"
+msgid "Banners (landscape)"
+msgstr "Banner (landscape)"
+
+msgctxt "#32025"
+msgid "Backgrounds (fanart)"
+msgstr "Sfondi (fanart)"
+
+msgctxt "#32026"
+msgid "Logos (clearlogo)"
+msgstr "Loghi (clearlogo)"
+
+msgctxt "#32027"
+msgid "Episode stills with the episode rating. Premium plan."
+msgstr "Fotogrammi degli episodi con il rating dell'episodio. Piano Premium."
+
+msgctxt "#32028"
+msgid "16:9 images with title logo and ratings, used by skins as landscape. Pro and Premium plans, switched on in your dashboard."
+msgstr "Immagini 16:9 con logo del titolo e rating, usate dalle skin come landscape. Piani Pro e Premium, da attivare nella dashboard."
+
+msgctxt "#32029"
+msgid "Cinematic backgrounds with title details, used as fanart. Premium plan, switched on in your dashboard."
+msgstr "Sfondi con i dettagli del titolo, usati come fanart. Piano Premium, da attivare nella dashboard."
+
+msgctxt "#32030"
+msgid "Updates"
+msgstr "Aggiornamenti"
+
+msgctxt "#32031"
+msgid "Refresh ratings every (days)"
+msgstr "Aggiorna i rating ogni (giorni)"
+
+msgctxt "#32032"
+msgid "Apply artwork now"
+msgstr "Applica l'artwork ora"
+
+msgctxt "#32033"
+msgid "Restore original artwork"
+msgstr "Ripristina l'artwork originale"
+
+msgctxt "#32034"
+msgid "Cached images are dropped on this schedule and fetched again, with current ratings, the next time they are shown. 0 = never."
+msgstr "Con questa cadenza le immagini in cache vengono scartate e riscaricate, con i rating aggiornati, la prossima volta che compaiono. 0 = mai."
+
+msgctxt "#32035"
+msgid "Goes through the whole library now. It also happens on its own after every library scan."
+msgstr "Passa subito tutta la libreria. Succede comunque da solo dopo ogni scansione."
+
+msgctxt "#32036"
+msgid "Refresh ratings now"
+msgstr "Aggiorna i rating ora"
+
+msgctxt "#32037"
+msgid "Drops the cached images now: each one is fetched again the next time it is shown."
+msgstr "Scarta subito le immagini in cache: ognuna viene riscaricata la prossima volta che compare."
+
+msgctxt "#32038"
+msgid "Puts back the artwork your scraper had found and turns TOP Posters off."
+msgstr "Rimette l'artwork trovato dal tuo scraper e disattiva TOP Posters."
+
+msgctxt "#32040"
+msgid "Advanced"
+msgstr "Avanzate"
+
+msgctxt "#32041"
+msgid "Server URL"
+msgstr "URL del server"
+
+msgctxt "#32042"
+msgid "Only change this if TOP Posters support asks you to."
+msgstr "Da cambiare solo se te lo chiede l'assistenza di TOP Posters."
+
+msgctxt "#32100"
+msgid "API key OK. Plan: %s"
+msgstr "API key valida. Piano: %s"
+
+msgctxt "#32101"
+msgid "TOP Posters: the API key is invalid or expired"
+msgstr "TOP Posters: la API key non è valida o è scaduta"
+
+msgctxt "#32102"
+msgid "Could not reach TOP Posters. Check your connection and try again."
+msgstr "Impossibile raggiungere TOP Posters. Controlla la connessione e riprova."
+
+msgctxt "#32103"
+msgid "Enter your TOP Posters API key in the add-on settings first."
+msgstr "Prima inserisci la tua API key di TOP Posters nelle impostazioni dell'add-on."
+
+msgctxt "#32104"
+msgid "Applying artwork…"
+msgstr "Applico l'artwork…"
+
+msgctxt "#32105"
+msgid "Artwork updated on %d items"
+msgstr "Artwork aggiornato su %d elementi"
+
+msgctxt "#32106"
+msgid "Original artwork restored on %d items"
+msgstr "Artwork originale ripristinato su %d elementi"
+
+msgctxt "#32107"
+msgid "Not included in your plan: %s"
+msgstr "Non incluso nel tuo piano: %s"
+
+msgctxt "#32108"
+msgid "Switched off in your TOP Posters dashboard: %s"
+msgstr "Disattivati nella dashboard di TOP Posters: %s"
+
+msgctxt "#32109"
+msgid "Restoring original artwork…"
+msgstr "Ripristino l'artwork originale…"
+
+msgctxt "#32110"
+msgid "Ratings will update as images are shown"
+msgstr "I rating si aggiornano man mano che le immagini compaiono"

@@ -1,0 +1,197 @@
+# Kodi Media Center language file
+# Addon Name: TOP Posters
+# Addon id: service.topposters
+# Addon Provider: TOP Posters
+msgid ""
+msgstr ""
+"Project-Id-Version: service.topposters\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#32000"
+msgid "General"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Account"
+msgstr ""
+
+msgctxt "#32002"
+msgid "API key"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Your TOP Posters API key (it starts with TP-). You find it in your dashboard at top-posters.com."
+msgstr ""
+
+msgctxt "#32004"
+msgid "Check API key"
+msgstr ""
+
+msgctxt "#32005"
+msgid "Shows your plan and which artwork it includes."
+msgstr ""
+
+msgctxt "#32006"
+msgid "Use TOP Posters artwork"
+msgstr ""
+
+msgctxt "#32007"
+msgid "When off, your original artwork is put back and kept, even after new library scans."
+msgstr ""
+
+msgctxt "#32010"
+msgid "Libraries"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Movies"
+msgstr ""
+
+msgctxt "#32012"
+msgid "TV shows"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Transparent title logo with rating badges, used by skins as clearlogo. Switch logos on in your TOP Posters dashboard first."
+msgstr ""
+
+msgctxt "#32020"
+msgid "Artwork"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Posters"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Season posters"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Episode thumbnails"
+msgstr ""
+
+msgctxt "#32024"
+msgid "Banners (landscape)"
+msgstr ""
+
+msgctxt "#32025"
+msgid "Backgrounds (fanart)"
+msgstr ""
+
+msgctxt "#32026"
+msgid "Logos (clearlogo)"
+msgstr ""
+
+msgctxt "#32027"
+msgid "Episode stills with the episode rating. Premium plan."
+msgstr ""
+
+msgctxt "#32028"
+msgid "16:9 images with title logo and ratings, used by skins as landscape. Pro and Premium plans, switched on in your dashboard."
+msgstr ""
+
+msgctxt "#32029"
+msgid "Cinematic backgrounds with title details, used as fanart. Premium plan, switched on in your dashboard."
+msgstr ""
+
+msgctxt "#32030"
+msgid "Updates"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Refresh ratings every (days)"
+msgstr ""
+
+msgctxt "#32032"
+msgid "Apply artwork now"
+msgstr ""
+
+msgctxt "#32033"
+msgid "Restore original artwork"
+msgstr ""
+
+msgctxt "#32034"
+msgid "Cached images are dropped on this schedule and fetched again, with current ratings, the next time they are shown. 0 = never."
+msgstr ""
+
+msgctxt "#32035"
+msgid "Goes through the whole library now. It also happens on its own after every library scan."
+msgstr ""
+
+msgctxt "#32036"
+msgid "Refresh ratings now"
+msgstr ""
+
+msgctxt "#32037"
+msgid "Drops the cached images now: each one is fetched again the next time it is shown."
+msgstr ""
+
+msgctxt "#32038"
+msgid "Puts back the artwork your scraper had found and turns TOP Posters off."
+msgstr ""
+
+msgctxt "#32040"
+msgid "Advanced"
+msgstr ""
+
+msgctxt "#32041"
+msgid "Server URL"
+msgstr ""
+
+msgctxt "#32042"
+msgid "Only change this if TOP Posters support asks you to."
+msgstr ""
+
+msgctxt "#32100"
+msgid "API key OK. Plan: %s"
+msgstr ""
+
+msgctxt "#32101"
+msgid "TOP Posters: the API key is invalid or expired"
+msgstr ""
+
+msgctxt "#32102"
+msgid "Could not reach TOP Posters. Check your connection and try again."
+msgstr ""
+
+msgctxt "#32103"
+msgid "Enter your TOP Posters API key in the add-on settings first."
+msgstr ""
+
+msgctxt "#32104"
+msgid "Applying artwork…"
+msgstr ""
+
+msgctxt "#32105"
+msgid "Artwork updated on %d items"
+msgstr ""
+
+msgctxt "#32106"
+msgid "Original artwork restored on %d items"
+msgstr ""
+
+msgctxt "#32107"
+msgid "Not included in your plan: %s"
+msgstr ""
+
+msgctxt "#32108"
+msgid "Switched off in your TOP Posters dashboard: %s"
+msgstr ""
+
+msgctxt "#32109"
+msgid "Restoring original artwork…"
+msgstr ""
+
+msgctxt "#32110"
+msgid "Ratings will update as images are shown"
+msgstr ""
