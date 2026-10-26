@@ -1,7 +1,7 @@
 """Walks the video library and brings every item's artwork in line with the
 settings: our URLs where they are wanted, the originals everywhere else."""
 
-from resources.lib.artwork import DEFAULT_BASE_URL, MANAGED_ART, UrlBuilder, media_ref, reconcile, unwrap
+from resources.lib.artwork import DEFAULT_BASE_URL, MANAGED_ART, UrlBuilder, is_remote, media_ref, reconcile, unwrap
 
 
 class Config(object):
@@ -29,11 +29,12 @@ class Config(object):
 
 
 class Syncer(object):
-    def __init__(self, library, config, store, should_stop=None):
+    def __init__(self, library, config, store, should_stop=None, local_cache=None):
         self.library = library
         self.config = config
         self.store = store
         self.should_stop = should_stop or (lambda: False)
+        self.local_cache = local_cache
         self.urls = UrlBuilder(config.base_url, config.api_key)
         # URLs from the default server count as ours even when a custom one is
         # set, so switching servers never mistakes them for originals.
@@ -43,15 +44,23 @@ class Syncer(object):
         self.written = []
 
     def is_ours(self, url):
-        return url.startswith(self.prefixes)
+        return url.startswith(self.prefixes) or bool(self.local_cache and self.local_cache.is_ours(url))
 
     def _apply(self, kind, item, make_url):
         dbid = item[kind + "id"]
         art = item.get("art") or {}
         current = dict((t, unwrap(art.get(t))) for t in MANAGED_ART[kind])
+        if self.local_cache:
+            for url in current.values():
+                self.local_cache.remember_current(url)
         saved = self.store.originals(kind, dbid)
         before = dict(saved)
-        changes = reconcile(MANAGED_ART[kind], current, saved, make_url, self.is_ours)
+        def safe_url(art_type, original):
+            target = make_url(art_type, original)
+            if target and original and not is_remote(original):
+                return self.local_cache.select(target, original) if self.local_cache else original
+            return target
+        changes = reconcile(MANAGED_ART[kind], current, saved, safe_url, self.is_ours)
         if saved != before:
             self.store.touch()
         if changes:
@@ -88,6 +97,8 @@ class Syncer(object):
         changed = int(self._apply("tvshow", show, self._title_maker("tvshow", ref)))
         if with_children:
             for season in self.library.seasons(show["tvshowid"]):
+                if self.should_stop():
+                    return changed
                 changed += self.season(season, ref)
             for episode in self.library.episodes(show["tvshowid"]):
                 if self.should_stop():
@@ -123,6 +134,8 @@ class Syncer(object):
                 done += 1
                 if progress:
                     progress(done, total)
+            if self.local_cache and not self.should_stop():
+                self.local_cache.complete()
             return changed
         finally:
             self.store.save()

@@ -11,6 +11,7 @@ import xbmcgui
 from resources.lib import kodi
 from resources.lib.api import INVALID, UNREACHABLE, VALID, verify_key
 from resources.lib.library import Library
+from resources.lib.local_artwork import LocalArtworkCache
 from resources.lib.store import Store
 from resources.lib.sync import Config, Syncer
 
@@ -86,7 +87,12 @@ class Service(object):
         return read_config(self.store.get("caps"))
 
     def syncer(self, config):
-        return Syncer(self.library, config, self.store, should_stop=self.monitor.abortRequested)
+        return Syncer(self.library, config, self.store, should_stop=self.monitor.abortRequested,
+                      local_cache=self.local_cache(config))
+
+    def local_cache(self, config):
+        return LocalArtworkCache(self.store, kodi.user_agent(), kodi.setting_int("refresh_days", 7),
+                                 namespace=config.base_url + "|" + config.api_key)
 
     def _remember_writes(self, syncer):
         now = time.time()
@@ -170,7 +176,11 @@ class Service(object):
             return
         removed = self.library.remove_textures(self.config().base_url + "/")
         self.store.set("last_refresh", time.time())
+        self.store.set("local_refresh_after", time.time())
+        if force:
+            self.store.set("local_artwork_cooldown", {})
         self.store.save()
+        self.monitor.schedule_full_pass()
         kodi.log("Ratings refresh: %d cached images dropped" % removed)
 
     def item_pass(self):
@@ -227,6 +237,9 @@ class Service(object):
         if time.time() >= self.next_refresh_check:
             self.next_refresh_check = time.time() + REFRESH_CHECK_EVERY
             self.refresh_textures()
+            config = self.config()
+            if config.enabled and config.api_key and self.local_cache(config).needs_refresh():
+                self.monitor.schedule_full_pass()
 
     def run(self):
         kodi.log("Service started")

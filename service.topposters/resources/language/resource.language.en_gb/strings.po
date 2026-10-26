@@ -121,7 +121,7 @@ msgid "Restore original artwork"
 msgstr ""
 
 msgctxt "#32034"
-msgid "Cached images are dropped on this schedule and fetched again, with current ratings, the next time they are shown. 0 = never."
+msgid "Online images reload when shown; downloaded local replacements update in the background. 0 = no scheduled refresh."
 msgstr ""
 
 msgctxt "#32035"
@@ -133,7 +133,7 @@ msgid "Refresh ratings now"
 msgstr ""
 
 msgctxt "#32037"
-msgid "Drops the cached images now: each one is fetched again the next time it is shown."
+msgid "Updates downloaded replacements and clears cached online images. Existing artwork stays available if a local replacement cannot be downloaded."
 msgstr ""
 
 msgctxt "#32038"
@@ -193,5 +193,5 @@ msgid "Restoring original artwork…"
 msgstr ""
 
 msgctxt "#32110"
-msgid "Ratings will update as images are shown"
+msgid "Ratings refresh queued"
 msgstr ""

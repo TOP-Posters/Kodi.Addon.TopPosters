@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.topposters" name="TOP Posters" version="1.0.0" provider-name="TOP Posters">
+<addon id="service.topposters" name="TOP Posters" version="1.1.0" provider-name="TOP Posters">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -15,7 +15,11 @@
     <platform>all</platform>
     <website>https://top-posters.com</website>
     <source>https://github.com/TOP-Posters/Kodi.Addon.TopPosters</source>
-    <news>v1.0.0
+    <news>v1.1.0
+- Keep local originals or the last good replacement when artwork downloads fail
+- Refresh downloaded replacements on schedule and preserve original-artwork restoration
+
+v1.0.0
 - First release</news>
     <assets>
       <icon>resources/icon.png</icon>

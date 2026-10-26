@@ -168,3 +168,54 @@ def test_addon_xml_points_at_real_files():
             assert os.path.isfile(os.path.join(ADDON_DIR, ext.get("library")))
     icon = root.find("extension/assets/icon").text
     assert os.path.isfile(os.path.join(ADDON_DIR, icon))
+
+
+def test_local_artwork_refresh_and_restore_through_service(env, monkeypatch):
+    from test_local_artwork import PNG, PNG2, Response
+    from resources.lib import local_artwork
+    kodi, settings, svc, xbmc, xbmcgui, _ = env
+    original = "smb://nas/Movies/Matrix/poster.jpg"
+    kodi.art("movie", 1)["poster"] = original
+    calls = []
+    content = [PNG]
+
+    def download(request, timeout):
+        calls.append(request.full_url)
+        return Response(content[0])
+
+    monkeypatch.setattr(local_artwork, "urlopen", download)
+    started(svc)
+    prepared = kodi.art("movie", 1)["poster"]
+    assert os.path.isfile(prepared) and len(calls) == 1
+    assert svc.store.originals("movie", 1)["poster"] == original
+    assert "fallback_url" not in calls[0]
+    svc.full_pass()
+    assert len(calls) == 1  # No additional download while the local copy is fresh.
+
+    content[0] = PNG2
+    svc.monitor.onNotification("service.topposters", "Other.refresh", "null")
+    svc.tick()
+    updated = kodi.art("movie", 1)["poster"]
+    assert updated != prepared and os.path.isfile(updated) and len(calls) == 2
+    svc.restore()
+    assert kodi.art("movie", 1)["poster"] == original and settings["enabled"] == "false"
+
+
+def test_offline_refresh_keeps_last_good_local_artwork(env, monkeypatch):
+    from urllib.error import URLError
+    from test_local_artwork import Response
+    from resources.lib import local_artwork
+    kodi, settings, svc, xbmc, xbmcgui, _ = env
+    kodi.art("movie", 1)["poster"] = "/media/matrix/poster.jpg"
+    monkeypatch.setattr(local_artwork, "urlopen", lambda *a, **k: Response())
+    started(svc)
+    prepared = kodi.art("movie", 1)["poster"]
+
+    def offline(*args, **kwargs):
+        raise URLError("offline")
+
+    monkeypatch.setattr(local_artwork, "urlopen", offline)
+    svc.refresh_textures(force=True)
+    svc.tick()
+    assert kodi.art("movie", 1)["poster"] == prepared and os.path.isfile(prepared)
+    assert svc.store.originals("movie", 1)["poster"] == "/media/matrix/poster.jpg"
