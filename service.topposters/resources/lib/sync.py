@@ -6,7 +6,7 @@ from resources.lib.artwork import DEFAULT_BASE_URL, MANAGED_ART, UrlBuilder, is_
 
 class Config(object):
     def __init__(self, enabled=True, api_key="", base_url=DEFAULT_BASE_URL, movies=True, tvshows=True,
-                 toggles=None, caps=None):
+                 toggles=None, caps=None, device_id=None):
         # Off means "put every original back": the same pass, wanting nothing.
         self.enabled = enabled
         self.api_key = (api_key or "").strip()
@@ -17,6 +17,8 @@ class Config(object):
         self.toggles = toggles or {}
         # What the plan allows, from the last key check (None = unknown)
         self.caps = caps
+        # This installation's ID, added to every artwork URL
+        self.device_id = device_id
 
     def wants(self, kind, art_type):
         if not self.enabled or not self.api_key:
@@ -35,7 +37,7 @@ class Syncer(object):
         self.store = store
         self.should_stop = should_stop or (lambda: False)
         self.local_cache = local_cache
-        self.urls = UrlBuilder(config.base_url, config.api_key)
+        self.urls = UrlBuilder(config.base_url, config.api_key, config.device_id)
         # URLs from the default server count as ours even when a custom one is
         # set, so switching servers never mistakes them for originals.
         self.prefixes = tuple(set([DEFAULT_BASE_URL + "/", config.base_url + "/"]))

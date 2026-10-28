@@ -17,8 +17,11 @@ your library's artwork, and Kodi shows them like any other artwork.
 | `fanart` | Cinematic background | Premium (switch on in Dashboard → Backgrounds) |
 | `clearlogo` | Transparent logo with rating badges | Premium (switch on in Dashboard → Logos) |
 
-Badge style, language and order come from your dashboard at top-posters.com. Kodi is recognised
-as its own device there, so you can give it settings of its own.
+Badge style, language and order come from your dashboard at top-posters.com. Each Kodi
+installation appears there as its own device, named after its platform, so two boxes
+can have different settings. The add-on creates the installation ID on first run and adds it to
+every artwork URL. If you copy Kodi's data folder to another box, use **Advanced → Use a new
+installation ID** on the copy.
 
 ## Install
 

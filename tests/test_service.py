@@ -219,3 +219,25 @@ def test_offline_refresh_keeps_last_good_local_artwork(env, monkeypatch):
     svc.tick()
     assert kodi.art("movie", 1)["poster"] == prepared and os.path.isfile(prepared)
     assert svc.store.originals("movie", 1)["poster"] == "/media/matrix/poster.jpg"
+
+
+def test_installation_id_is_kept_and_can_be_replaced(env):
+    kodi, settings, svc, xbmc, xbmcgui, service_module = env
+    started(svc)
+    first = svc.store.get("device_id")
+    assert first and kodi.art("movie", 1)["poster"].endswith("device_id=" + first)
+    # Survives a restart: a new service reads the same state file
+    assert service_module.Service().installation_id() == first
+
+    svc.monitor.actions.append("new_installation_id")
+    svc.tick()
+    second = svc.store.get("device_id")
+    assert second != first
+    svc.tick()
+    assert kodi.art("movie", 1)["poster"].endswith("device_id=" + second)
+
+
+def test_user_agent_carries_the_kodi_platform(env):
+    from resources.lib import kodi as integration
+    assert integration.user_agent().startswith("Kodi/21.1 (Linux; Android 12; SHIELD Android TV")
+    assert "TOP Posters add-on/" in integration.user_agent()

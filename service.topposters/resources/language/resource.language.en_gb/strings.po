@@ -152,6 +152,14 @@ msgctxt "#32042"
 msgid "Only change this if TOP Posters support asks you to."
 msgstr ""
 
+msgctxt "#32043"
+msgid "Use a new installation ID"
+msgstr ""
+
+msgctxt "#32044"
+msgid "Use this if you copied Kodi's data folder from another device: TOP Posters then lists this Kodi as a separate device with its own settings."
+msgstr ""
+
 msgctxt "#32100"
 msgid "API key OK. Plan: %s"
 msgstr ""
@@ -194,4 +202,8 @@ msgstr ""
 
 msgctxt "#32110"
 msgid "Ratings refresh queued"
+msgstr ""
+
+msgctxt "#32111"
+msgid "New installation ID: TOP Posters now lists this Kodi as a separate device"
 msgstr ""

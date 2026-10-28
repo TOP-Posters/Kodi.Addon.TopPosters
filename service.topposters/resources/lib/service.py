@@ -4,6 +4,7 @@ item refreshes, when settings change, and refreshes cached images on schedule.""
 import json
 import os
 import time
+import uuid
 
 import xbmc
 import xbmcgui
@@ -26,7 +27,7 @@ DAY = 24 * 3600
 ART_LABELS = {"thumb": 32023, "landscape": 32024, "fanart": 32025}
 
 
-def read_config(caps):
+def read_config(caps, device_id=None):
     return Config(
         enabled=kodi.setting_bool("enabled"),
         api_key=kodi.setting("api_key"),
@@ -42,6 +43,7 @@ def read_config(caps):
             "clearlogo": kodi.setting_bool("logos"),
         },
         caps=caps,
+        device_id=device_id,
     )
 
 
@@ -84,7 +86,18 @@ class Service(object):
         self.next_refresh_check = 0
 
     def config(self):
-        return read_config(self.store.get("caps"))
+        return read_config(self.store.get("caps"), self.installation_id())
+
+    def installation_id(self, new=False):
+        """This installation's ID, created on first use and kept in the state
+        file. A copied data folder carries it along, hence the settings button
+        that replaces it."""
+        device_id = self.store.get("device_id")
+        if new or not device_id:
+            device_id = uuid.uuid4().hex
+            self.store.set("device_id", device_id)
+            self.store.save()
+        return device_id
 
     def syncer(self, config):
         return Syncer(self.library, config, self.store, should_stop=self.monitor.abortRequested,
@@ -226,6 +239,11 @@ class Service(object):
             elif action == "refresh":
                 self.refresh_textures(force=True)
                 kodi.notify(kodi.string(32110))
+            elif action == "new_installation_id":
+                # New ID = new artwork URLs: the full pass writes them everywhere
+                self.installation_id(new=True)
+                self.monitor.schedule_full_pass()
+                kodi.notify(kodi.string(32111))
         if kodi.is_scanning():
             return
         pending = self.monitor.full_pass_at

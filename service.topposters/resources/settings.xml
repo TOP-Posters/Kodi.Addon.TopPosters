@@ -123,6 +123,16 @@
             <heading>32041</heading>
           </control>
         </setting>
+        <setting id="new_installation_id" type="action" label="32043" help="32044">
+          <level>3</level>
+          <data>RunScript(service.topposters,new_installation_id)</data>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
       </group>
     </category>
   </section>

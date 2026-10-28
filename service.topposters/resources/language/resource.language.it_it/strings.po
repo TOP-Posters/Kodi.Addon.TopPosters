@@ -152,6 +152,14 @@ msgctxt "#32042"
 msgid "Only change this if TOP Posters support asks you to."
 msgstr "Da cambiare solo se te lo chiede l'assistenza di TOP Posters."
 
+msgctxt "#32043"
+msgid "Use a new installation ID"
+msgstr "Usa un nuovo ID di installazione"
+
+msgctxt "#32044"
+msgid "Use this if you copied Kodi's data folder from another device: TOP Posters then lists this Kodi as a separate device with its own settings."
+msgstr "Da usare se hai copiato la cartella dati di Kodi da un altro dispositivo: in TOP Posters questo Kodi diventa un dispositivo a sé, con impostazioni proprie."
+
 msgctxt "#32100"
 msgid "API key OK. Plan: %s"
 msgstr "API key valida. Piano: %s"
@@ -195,3 +203,7 @@ msgstr "Ripristino l'artwork originale…"
 msgctxt "#32110"
 msgid "Ratings refresh queued"
 msgstr "Aggiornamento dei rating programmato"
+
+msgctxt "#32111"
+msgid "New installation ID: TOP Posters now lists this Kodi as a separate device"
+msgstr "Nuovo ID di installazione: in TOP Posters questo Kodi è ora un dispositivo a sé"

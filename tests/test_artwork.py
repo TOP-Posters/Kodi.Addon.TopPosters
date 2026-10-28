@@ -87,3 +87,11 @@ def test_reconcile_takes_a_rescraped_original():
     changes = reconcile(("poster",), {"poster": "https://tmdb/new.jpg"}, saved, make_ours, ours)
     assert saved == {"poster": "https://tmdb/new.jpg"}
     assert changes == {"poster": BASE + "/k/poster.jpg?fb=https://tmdb/new.jpg"}
+
+
+def test_installation_id_is_added_next_to_the_fallback():
+    urls = UrlBuilder(BASE, "TP-key", device_id="abc123")
+    poster = urls.art("poster", ("tmdb", "movie-603"), "https://image.tmdb.org/t/p/w500/x.jpg?a=1&b=2")
+    params = parse_qs(urlparse(poster).query)
+    assert params == {"fallback_url": ["https://image.tmdb.org/t/p/w500/x.jpg?a=1&b=2"], "device_id": ["abc123"]}
+    assert urls.episode_thumb(("tmdb", "series-1399"), 2, 5) == BASE + "/TP-key/tmdb/thumbnail/series-1399/S2E5.jpg?device_id=abc123"

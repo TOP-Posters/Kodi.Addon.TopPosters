@@ -122,6 +122,7 @@ def install_xbmc_stubs(kodi, settings, profile):
     xbmc.log = lambda msg, level=1: xbmc.logged.append(msg)
     xbmc.executeJSONRPC = kodi.execute_json
     xbmc.getInfoLabel = lambda label: "21.1 (21.1.0) Git:20240901"
+    xbmc.getUserAgent = lambda: "Kodi/21.1 (Linux; Android 12; SHIELD Android TV Build/SR1A) Android/12.0.0 Version/21.1"
     xbmc.scanning = False
     xbmc.getCondVisibility = lambda cond: xbmc.scanning if cond == "Library.IsScanningVideo" else False
 
