@@ -121,8 +121,8 @@ msgid "Restore original artwork"
 msgstr "Ripristina l'artwork originale"
 
 msgctxt "#32034"
-msgid "Cached images are dropped on this schedule and fetched again, with current ratings, the next time they are shown. 0 = never."
-msgstr "Con questa cadenza le immagini in cache vengono scartate e riscaricate, con i rating aggiornati, la prossima volta che compaiono. 0 = mai."
+msgid "Online images reload when shown; downloaded local replacements update in the background. 0 = no scheduled refresh."
+msgstr "Le immagini online si ricaricano quando compaiono; le copie locali si aggiornano in background. 0 = nessun aggiornamento periodico."
 
 msgctxt "#32035"
 msgid "Goes through the whole library now. It also happens on its own after every library scan."
@@ -133,8 +133,8 @@ msgid "Refresh ratings now"
 msgstr "Aggiorna i rating ora"
 
 msgctxt "#32037"
-msgid "Drops the cached images now: each one is fetched again the next time it is shown."
-msgstr "Scarta subito le immagini in cache: ognuna viene riscaricata la prossima volta che compare."
+msgid "Updates downloaded replacements and clears cached online images. Existing artwork stays available if a local replacement cannot be downloaded."
+msgstr "Aggiorna le copie scaricate e svuota la cache delle immagini online. Se una sostituzione locale non si può scaricare, resta disponibile l’immagine precedente."
 
 msgctxt "#32038"
 msgid "Puts back the artwork your scraper had found and turns TOP Posters off."
@@ -151,6 +151,14 @@ msgstr "URL del server"
 msgctxt "#32042"
 msgid "Only change this if TOP Posters support asks you to."
 msgstr "Da cambiare solo se te lo chiede l'assistenza di TOP Posters."
+
+msgctxt "#32043"
+msgid "Use a new installation ID"
+msgstr "Usa un nuovo ID di installazione"
+
+msgctxt "#32044"
+msgid "Use this if you copied Kodi's data folder from another device: TOP Posters then lists this Kodi as a separate device with its own settings."
+msgstr "Da usare se hai copiato la cartella dati di Kodi da un altro dispositivo: in TOP Posters questo Kodi diventa un dispositivo a sé, con impostazioni proprie."
 
 msgctxt "#32100"
 msgid "API key OK. Plan: %s"
@@ -193,5 +201,9 @@ msgid "Restoring original artwork…"
 msgstr "Ripristino l'artwork originale…"
 
 msgctxt "#32110"
-msgid "Ratings will update as images are shown"
-msgstr "I rating si aggiornano man mano che le immagini compaiono"
+msgid "Ratings refresh queued"
+msgstr "Aggiornamento dei rating programmato"
+
+msgctxt "#32111"
+msgid "New installation ID: TOP Posters now lists this Kodi as a separate device"
+msgstr "Nuovo ID di installazione: in TOP Posters questo Kodi è ora un dispositivo a sé"

@@ -4,7 +4,7 @@ import sys
 
 from resources.lib import kodi
 
-ACTIONS = ("verify", "apply", "restore", "refresh")
+ACTIONS = ("verify", "apply", "restore", "refresh", "new_installation_id")
 
 if __name__ == "__main__":
     action = sys.argv[1] if len(sys.argv) > 1 else ""

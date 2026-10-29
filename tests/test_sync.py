@@ -53,16 +53,15 @@ def path(url):
 
 def test_posters_only_by_default_choice(kodi, store):
     changed, _ = run(kodi, store, toggles={"poster": True, "season_poster": True})
-    assert changed == 4  # Matrix, Alien, GoT, GoT season 1
+    assert changed == 3  # Matrix, GoT, GoT season 1; local art needs a prepared replacement
     matrix = kodi.art("movie", 1)
     assert path(matrix["poster"]) == "/TP-key/tmdb/poster/movie-603.jpg"
     assert fallback(matrix["poster"]) == TMDB + "matrix.jpg"
     assert matrix["fanart"] == TMDB + "matrix-bg.jpg"
     # No usable ID: left alone
     assert kodi.art("movie", 2) == {"poster": "/media/Movies/Home/poster.jpg"}
-    # Local original: our URL, but no fallback to a path the API cannot reach
-    alien = kodi.art("movie", 3)["poster"]
-    assert path(alien) == "/TP-key/imdb/poster/tt0078748.jpg" and fallback(alien) is None
+    # Without a local downloader, keep the original rather than an unsafe HTTP URL.
+    assert kodi.art("movie", 3)["poster"] == "smb://nas/Movies/Alien/poster.jpg"
     assert path(kodi.art("tvshow", 10)["poster"]) == "/TP-key/tmdb/poster/series-1399.jpg"
     assert path(kodi.art("season", 100)["poster"]) == "/TP-key/tmdb/poster/series-1399-s1.jpg"
     # Specials are skipped

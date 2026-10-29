@@ -5,7 +5,7 @@ builds, and `reconcile` decides what to write back to the library.
 """
 
 import re
-from urllib.parse import quote, unquote
+from urllib.parse import quote, unquote, urlencode
 
 DEFAULT_BASE_URL = "https://api.top-posters.com"
 
@@ -66,17 +66,25 @@ def media_ref(kind, uniqueid):
 
 
 class UrlBuilder(object):
-    def __init__(self, base_url, api_key):
+    def __init__(self, base_url, api_key, device_id=None):
         self.base_url = (base_url or DEFAULT_BASE_URL).rstrip("/")
         self.api_key = api_key
+        self.device_id = device_id
 
     def _url(self, id_type, tail, fallback):
         url = "%s/%s/%s/%s" % (self.base_url, quote(self.api_key, safe=""), id_type, tail)
+        params = []
         # The API answers any failure (unknown title, expired key, monthly
         # limit) with a redirect to fallback_url, so Kodi keeps showing the
         # original artwork instead of an empty slot.
         if is_remote(fallback):
-            url += "?fallback_url=" + quote(fallback, safe="")
+            params.append(("fallback_url", fallback))
+        # Two Kodi boxes on the same platform send the same user agent: this
+        # ID gives each installation its own device and settings in TOP Posters.
+        if self.device_id:
+            params.append(("device_id", self.device_id))
+        if params:
+            url += "?" + urlencode(params, quote_via=quote, safe="")
         return url
 
     def art(self, art_type, ref, fallback=None, season=None):

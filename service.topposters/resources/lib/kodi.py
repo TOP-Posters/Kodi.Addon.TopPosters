@@ -65,10 +65,9 @@ def notify_service(action):
 
 
 def user_agent():
-    return "Kodi/%s TOP Posters add-on/%s" % (
-        xbmc.getInfoLabel("System.BuildVersion").split(" ")[0],
-        ADDON.getAddonInfo("version"),
-    )
+    # Kodi's own user agent names the platform (Android TV, Windows,
+    # LibreELEC...), which TOP Posters shows for this device in the dashboard.
+    return "%s TOP Posters add-on/%s" % (xbmc.getUserAgent(), ADDON.getAddonInfo("version"))
 
 
 def is_scanning():

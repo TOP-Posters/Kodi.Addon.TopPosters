@@ -168,3 +168,76 @@ def test_addon_xml_points_at_real_files():
             assert os.path.isfile(os.path.join(ADDON_DIR, ext.get("library")))
     icon = root.find("extension/assets/icon").text
     assert os.path.isfile(os.path.join(ADDON_DIR, icon))
+
+
+def test_local_artwork_refresh_and_restore_through_service(env, monkeypatch):
+    from test_local_artwork import PNG, PNG2, Response
+    from resources.lib import local_artwork
+    kodi, settings, svc, xbmc, xbmcgui, _ = env
+    original = "smb://nas/Movies/Matrix/poster.jpg"
+    kodi.art("movie", 1)["poster"] = original
+    calls = []
+    content = [PNG]
+
+    def download(request, timeout):
+        calls.append(request.full_url)
+        return Response(content[0])
+
+    monkeypatch.setattr(local_artwork, "urlopen", download)
+    started(svc)
+    prepared = kodi.art("movie", 1)["poster"]
+    assert os.path.isfile(prepared) and len(calls) == 1
+    assert svc.store.originals("movie", 1)["poster"] == original
+    assert "fallback_url" not in calls[0]
+    svc.full_pass()
+    assert len(calls) == 1  # No additional download while the local copy is fresh.
+
+    content[0] = PNG2
+    svc.monitor.onNotification("service.topposters", "Other.refresh", "null")
+    svc.tick()
+    updated = kodi.art("movie", 1)["poster"]
+    assert updated != prepared and os.path.isfile(updated) and len(calls) == 2
+    svc.restore()
+    assert kodi.art("movie", 1)["poster"] == original and settings["enabled"] == "false"
+
+
+def test_offline_refresh_keeps_last_good_local_artwork(env, monkeypatch):
+    from urllib.error import URLError
+    from test_local_artwork import Response
+    from resources.lib import local_artwork
+    kodi, settings, svc, xbmc, xbmcgui, _ = env
+    kodi.art("movie", 1)["poster"] = "/media/matrix/poster.jpg"
+    monkeypatch.setattr(local_artwork, "urlopen", lambda *a, **k: Response())
+    started(svc)
+    prepared = kodi.art("movie", 1)["poster"]
+
+    def offline(*args, **kwargs):
+        raise URLError("offline")
+
+    monkeypatch.setattr(local_artwork, "urlopen", offline)
+    svc.refresh_textures(force=True)
+    svc.tick()
+    assert kodi.art("movie", 1)["poster"] == prepared and os.path.isfile(prepared)
+    assert svc.store.originals("movie", 1)["poster"] == "/media/matrix/poster.jpg"
+
+
+def test_installation_id_is_kept_and_can_be_replaced(env):
+    kodi, settings, svc, xbmc, xbmcgui, service_module = env
+    started(svc)
+    first = svc.store.get("device_id")
+    assert first and kodi.art("movie", 1)["poster"].endswith("device_id=" + first)
+    # Survives a restart: a new service reads the same state file
+    assert service_module.Service().installation_id() == first
+
+    svc.monitor.actions.append("new_installation_id")
+    svc.tick()
+    second = svc.store.get("device_id")
+    assert second != first
+    svc.tick()
+    assert kodi.art("movie", 1)["poster"].endswith("device_id=" + second)
+
+
+def test_user_agent_carries_the_kodi_platform(env):
+    from resources.lib import kodi as integration
+    assert integration.user_agent().startswith("Kodi/21.1 (Linux; Android 12; SHIELD Android TV")
+    assert "TOP Posters add-on/" in integration.user_agent()
